@@ -277,3 +277,38 @@ function Suszenie(){
 
 }
 
+function toggleTheme(){
+    document.body.classList.toggle("light");
+
+    const isLight = document.body.classList.contains("light");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+
+    document.getElementById("themeBtn").innerText =
+        isLight ? "☀️ Tryb dzienny" : "🌙 Tryb nocny";
+}
+
+(function(){
+    const saved = localStorage.getItem("theme");
+    if(saved === "light"){
+        document.body.classList.add("light");
+        document.getElementById("themeBtn").innerText = "☀️ Tryb dzienny";
+    }
+})();
+function filterContent(input, contentId){
+    const text = input.value.toLowerCase();
+    const pre = document.getElementById(contentId);
+
+    let original = pre.dataset.original;
+    if(!original){
+        original = pre.innerHTML;
+        pre.dataset.original = original;
+    }
+
+    if(text.trim() === ""){
+        pre.innerHTML = original;
+        return;
+    }
+
+    const regex = new RegExp(`(${text})`,'gi');
+    pre.innerHTML = original.replace(regex, `<mark>$1</mark>`);
+}

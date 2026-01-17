@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Oblicz Wyrok jakiemuś wariatowi">
-      <meta property="og:title" content="Kalkulator Wyroków">
-      <link rel="icon" type="image/png" href="favicon.png"/>
-      <title>Kalkulator wyroków KPP </title>
-      <link rel="stylesheet" href="style.css">
-      <link rel="shortcut icon" href="./kpp.png" type="image/png">
-   </head>
 <body>
 
 <div id="header">
@@ -20,14 +8,20 @@
     <button onclick="KK()" id="kodeksKBtn" class="wybierz">Kodeks Karny</button>
     <button onclick="KW()" id="kodeksWBtn" class="wybierz">Kodeks Wykroczeń</button>
     <button onclick="Suszenie()" id="suszenieBtn" class="wybierz">Suszenie</button>
+	<button onclick="toggleTheme()" id="themeBtn">🌙 Tryb nocny</button>
+
 </div>
 
-<div class="container">
+<div class="card" id="KodeksK" style="display:none">
+    <p class="title">Kodeks Karny</p>
+    <p class="subtitle">Wyszukuj artykuły i przewinienia</p>
+    <hr>
 
-    <div id="KodeksK" class="card" style="display:none">
-        <p class="title">Kodeks Karny</p>
-        <hr>
-        <pre>
+    <input class="search" placeholder="🔍 Szukaj artykułu lub treści..."
+           oninput="filterContent(this,'kkContent')">
+
+    <pre id="kkContent">
+
 
 ▪ Przestępstwa przeciwko Rzeczypospolitej Polskiej
 <input type="checkbox" class="check1" data-value1="300" data-value2="800" data-value3="Art. 133. KK">Art. 133. KK Znieważenie narodu lub państwa polskiego 300/800PLN
@@ -154,10 +148,16 @@
         </pre>
     </div>
 
-    <div id="KodeksW" class="card" style="display:none">
-        <p class="title">Kodeks Wykroczeń</p>
-        <hr>
-        <pre>
+    <div class="card" id="KodeksW" style="display:none">
+    <p class="title">Kodeks Wykroczeń</p>
+    <p class="subtitle">Wyszukuj artykuły i przewinienia</p>
+    <hr>
+
+    <input class="search" placeholder="🔍 Szukaj artykułu lub treści..."
+           oninput="filterContent(this,'kwContent')">
+
+    <pre id="kwContent">
+
 
 ▪ Wykroczenia przeciwko porządkowi i spokojowi publicznemu
 <input type="checkbox" class="check1" data-value1="0" data-value2="500" data-value3="Art. 49. KW">Art.  49. KW Lekceważenie Narodu Polskiego i konstytucyjnych organów  500PLN
@@ -248,4 +248,3 @@
 
 <script src="app.js"></script>
 </body>
-</html>
