@@ -1,40 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="Oblicz Wyrok jakiemuś wariatowi">
-      <meta property="og:title" content="Kalkulator Wyroków">
-      <link rel="icon" type="image/png" href="favicon.png"/>
-      <title>Kalkulator wyroków KPP </title>
-      <link rel="stylesheet" href="style.css">
-      <link rel="shortcut icon" href="./kpp.png" type="image/png">
-   </head>
-   <body>
-   <div id="header">
-      <img src="image.png" style="height: 350px;width: 100%;">
-   </div>   
-      
-      <div style="position: -webkit-sticky; /* Safari */
-      position: sticky;
-      top: 0;
-      padding: 5px;
-      background-color: #0c111d;
-      border: 2px solid #0c111d; 
-     ">
-      <div style="display: flex; justify-content: space-around;"> 
-         <button type="button" onclick="KK()" id="kodeksKBtn" class="wybierz">Kodeks Karny</button><button type="button" onclick="KW()" id="kodeksWBtn" class="wybierz">Kodeks Wykroczeń</button><button type="button" onclick="Suszenie()" id="suszenieBtn" class="wybierz">Suszenie</button>
-      </div>
-   </div>
-   
-      
-      <div class="kodeksy">
-         <div id="KodeksK" style="display: none;">
-            <p class="title">KODEKS KARNY</p>
-            <hr>
-            <pre>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulator Mandatów</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-▪ Przestępstwa przeciwko Rzeczypospolitej Polskiej
+<div class="navbar">
+    <button onclick="KK()">Kodeks Karny</button>
+    <button onclick="KW()">Kodeks Wykroczeń</button>
+    <button onclick="Suszenie()">Suszenie</button>
+</div>
+
+<div class="container">
+
+    <div id="KodeksK" class="card" style="display:none">
+        <h2>Kodeks Karny</h2>
+
+        ▪ Przestępstwa przeciwko Rzeczypospolitej Polskiej
 <input type="checkbox" class="check1" data-value1="300" data-value2="800" data-value3="Art. 133. KK">Art. 133. KK Znieważenie narodu lub państwa polskiego 300/800PLN
 <input type="checkbox" class="check1" data-value1="300" data-value2="1000" data-value3="Art. 135. KK">Art. 135. KK Czynna napaść lub znieważenie prezydenta RP  300/1000PLN
 <input type="checkbox" class="check1" data-value1="600" data-value2="1000" data-value3="Art. 137. KK">Art. 137. KK Publiczne znieważenie znaku lub symbolu państwowego 600/1000PLN
@@ -153,19 +137,12 @@
 <span class="blue">*Kolorem niebeskim zaznaczono Art. które Policja może wystosować tylko na wniosek pokrzywdzonego.</span>
 <span class="green">*kolorem zielonym zaznaczono Art. których ściganie odbywa się z oskarżenia prywatnego (cywilnego).</span>
 <span class="red">*Kolorem czerwonym zaznaczono Art. które Policja nie może wystawiać.</span>
+    </div>
 
+    <div id="KodeksW" class="card" style="display:none">
+        <h2>Kodeks Wykroczeń</h2>
 
-
-</pre>
-         </div>
-         <br><br>
-         <br>
-         <div id="KodeksW" style="display: none;" >
-            <p class="title">KODEKS WYKROCZEŃ</p>
-            <hr>
-            <pre>
-
-▪ Wykroczenia przeciwko porządkowi i spokojowi publicznemu
+        ▪ Wykroczenia przeciwko porządkowi i spokojowi publicznemu
 <input type="checkbox" class="check1" data-value1="0" data-value2="500" data-value3="Art. 49. KW">Art.  49. KW Lekceważenie Narodu Polskiego i konstytucyjnych organów  500PLN
 <input type="checkbox" class="check1" data-value1="0" data-value2="700" data-value3="Art. 50a. KW">Art.  50a. KW Posiadanie niebezpiecznych przedmiotów w miejscu publicznym 700PLN
 <input type="checkbox" class="check1" data-value1="0" data-value2="500" data-value3="Art. 51. KW">Art.  51. KW Zakłócenie spokoju lub porządku publicznego 500PLN
@@ -216,39 +193,28 @@
 <input type="checkbox" class="check1" data-value1="0" data-value2="500" data-value3="Art. 161. KW">Art.  161. KW Nieuprawniony wjazd pojazdem do lasu 500PLN
 
 <span class="blue">*Kolorem niebeskim zaznaczono Art. które Policja może wystosować tylko na wniosek pokrzywdzonego.</span>
+    </div>
 
-</pre>
-         
-         <div id="suszenie" style="display: none;">
-            <p class="title">Pomiar Prędkości</p>
-            <hr>
-            <pre>
-            Ograniczenie prędkości
-            
-			<input type="number" id="predkosc" placeholder="Przekroczenie prędkości (km/h)">
-            <input type="radio" name="kdw" class="check1" data-value1="20">20km/h<br>
-            <input type="radio" name="kdw" class="check1" data-value1="30">30km/h<br>
-            <input type="radio" name="kdw" class="check1" data-value1="50">50km/h<br>
-            <input type="radio" name="kdw" class="check1" data-value1="60">60km/h<br>
-            <input type="radio" name="kdw" class="check1" data-value1="90">90km/h<br>
-            
-            Przekroczona prędkość
-            <input type="number" id="predkosc">
-            </pre>
-         </div>
-      </div>
-      <div id="obliczanie">
-         <button type="button" value="Oblicz!" onclick="calculateTotal()">Oblicz!</button><button id="reset" type="button" value="Oblicz!" onclick="reset()">RESET</button><br>
-         powód:<br>
-         <input type="text" id="powod"><button onclick="myFunction()">Skopiuj!</button><br>
-         czas:<span id="error1"></span><br>
-         <input type="text" id="czas"><button onclick="myFunction3()">Skopiuj!</button><br>
-         mandat:<span id="error2"></span><br>
-         <input type="text" id="grzywna"><button onclick="myFunction4()">Skopiuj!</button><br>
-         <script src="app.js"></script>
-      </div>
-      <br>
-      <center>by patryk123/Project Mława</center>
-      <br>
-   </body>
+    <div id="suszenie" class="card" style="display:none">
+        <h2>Pomiar prędkości</h2>
+
+        <input type="number" id="predkosc" placeholder="Przekroczenie prędkości (km/h)">
+    </div>
+
+    <div class="card">
+        <button onclick="calculateTotal()">Oblicz</button>
+
+        <p>Powód:</p>
+        <input type="text" id="powod">
+
+        <p>Mandat:</p>
+        <input type="text" id="grzywna">
+
+        <p id="error" class="error"></p>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
 </html>
