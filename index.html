@@ -1,27 +1,38 @@
-<body>
-
-<div id="header">
-    <img src="image.png">
-</div>
-
-<div class="navbar">
-    <button onclick="KK()" id="kodeksKBtn" class="wybierz">Kodeks Karny</button>
-    <button onclick="KW()" id="kodeksWBtn" class="wybierz">Kodeks Wykroczeń</button>
-    <button onclick="Suszenie()" id="suszenieBtn" class="wybierz">Suszenie</button>
-	<button onclick="toggleTheme()" id="themeBtn">🌙 Tryb nocny</button>
-
-</div>
-
-<div class="card" id="KodeksK" style="display:none">
-    <p class="title">Kodeks Karny</p>
-    <p class="subtitle">Wyszukuj artykuły i przewinienia</p>
-    <hr>
-
-    <input class="search" placeholder="🔍 Szukaj artykułu lub treści..."
-           oninput="filterContent(this,'kkContent')">
-
-    <pre id="kkContent">
-
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Oblicz Wyrok jakiemuś wariatowi">
+      <meta property="og:title" content="Kalkulator Wyroków">
+      <link rel="icon" type="image/png" href="favicon.png"/>
+      <title>Kalkulator wyroków KPP </title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="shortcut icon" href="./kpp.png" type="image/png">
+   </head>
+   <body>
+   <div id="header">
+      <img src="image.png" style="height: 350px;width: 100%;">
+   </div>   
+      
+      <div style="position: -webkit-sticky; /* Safari */
+      position: sticky;
+      top: 0;
+      padding: 5px;
+      background-color: #0c111d;
+      border: 2px solid #0c111d; 
+     ">
+      <div style="display: flex; justify-content: space-around;"> 
+         <button type="button" onclick="KK()" id="kodeksKBtn" class="wybierz">Kodeks Karny</button><button type="button" onclick="KW()" id="kodeksWBtn" class="wybierz">Kodeks Wykroczeń</button><button type="button" onclick="Suszenie()" id="suszenieBtn" class="wybierz">Suszenie</button>
+      </div>
+   </div>
+   
+      
+      <div class="kodeksy">
+         <div id="KodeksK" style="display: none;">
+            <p class="title">KODEKS KARNY</p>
+            <hr>
+            <pre>
 
 ▪ Przestępstwa przeciwko Rzeczypospolitej Polskiej
 <input type="checkbox" class="check1" data-value1="300" data-value2="800" data-value3="Art. 133. KK">Art. 133. KK Znieważenie narodu lub państwa polskiego 300/800PLN
@@ -145,19 +156,14 @@
 
 
 
-        </pre>
-    </div>
-
-    <div class="card" id="KodeksW" style="display:none">
-    <p class="title">Kodeks Wykroczeń</p>
-    <p class="subtitle">Wyszukuj artykuły i przewinienia</p>
-    <hr>
-
-    <input class="search" placeholder="🔍 Szukaj artykułu lub treści..."
-           oninput="filterContent(this,'kwContent')">
-
-    <pre id="kwContent">
-
+</pre>
+         </div>
+         <br><br>
+         <br>
+         <div id="KodeksW" style="display: none;" >
+            <p class="title">KODEKS WYKROCZEŃ</p>
+            <hr>
+            <pre>
 
 ▪ Wykroczenia przeciwko porządkowi i spokojowi publicznemu
 <input type="checkbox" class="check1" data-value1="0" data-value2="500" data-value3="Art. 49. KW">Art.  49. KW Lekceważenie Narodu Polskiego i konstytucyjnych organów  500PLN
@@ -211,40 +217,38 @@
 
 <span class="blue">*Kolorem niebeskim zaznaczono Art. które Policja może wystosować tylko na wniosek pokrzywdzonego.</span>
 
-        </pre>
-    </div>
-
-    <div id="suszenie" class="card" style="display:none">
-        <p class="title">Pomiar Prędkości</p>
-        <hr>
-        <pre>
-<!-- TREŚĆ BEZ ZMIAN -->
-        </pre>
-    </div>
-
-    <div id="obliczanie">
-        <button onclick="calculateTotal()">Oblicz</button>
-        <button id="reset" onclick="reset()">Reset</button>
-
-        <br><br>
-        Powód:
-        <input type="text" id="powod">
-        <button class="copy-btn" onclick="myFunction()">Kopiuj</button>
-
-        Czas: <span id="error1"></span>
-        <input type="text" id="czas">
-        <button class="copy-btn" onclick="myFunction3()">Kopiuj</button>
-
-        Mandat: <span id="error2"></span>
-        <input type="text" id="grzywna">
-        <button class="copy-btn" onclick="myFunction4()">Kopiuj</button>
-    </div>
-
-</div>
-
-<footer>
-    by patryk123 / Project Mława
-</footer>
-
-<script src="app.js"></script>
-</body>
+</pre>
+         
+         <div id="suszenie" style="display: none;">
+            <p class="title">Pomiar Prędkości</p>
+            <hr>
+            <pre>
+            Ograniczenie prędkości
+            
+			<input type="number" id="predkosc" placeholder="Przekroczenie prędkości (km/h)">
+            <input type="radio" name="kdw" class="check1" data-value1="20">20km/h<br>
+            <input type="radio" name="kdw" class="check1" data-value1="30">30km/h<br>
+            <input type="radio" name="kdw" class="check1" data-value1="50">50km/h<br>
+            <input type="radio" name="kdw" class="check1" data-value1="60">60km/h<br>
+            <input type="radio" name="kdw" class="check1" data-value1="90">90km/h<br>
+            
+            Przekroczona prędkość
+            <input type="number" id="predkosc">
+            </pre>
+         </div>
+      </div>
+      <div id="obliczanie">
+         <button type="button" value="Oblicz!" onclick="calculateTotal()">Oblicz!</button><button id="reset" type="button" value="Oblicz!" onclick="reset()">RESET</button><br>
+         powód:<br>
+         <input type="text" id="powod"><button onclick="myFunction()">Skopiuj!</button><br>
+         czas:<span id="error1"></span><br>
+         <input type="text" id="czas"><button onclick="myFunction3()">Skopiuj!</button><br>
+         mandat:<span id="error2"></span><br>
+         <input type="text" id="grzywna"><button onclick="myFunction4()">Skopiuj!</button><br>
+         <script src="app.js"></script>
+      </div>
+      <br>
+      <center>by patryk123/Project Mława</center>
+      <br>
+   </body>
+</html>

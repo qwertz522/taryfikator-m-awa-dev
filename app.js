@@ -4,10 +4,33 @@ const czasgg = document.getElementById('czas');
 const grzywnagg = document.getElementById('grzywna');
 const error1dis = document.getElementById('error1');
 const error2dis = document.getElementById('error2');
-let suszenie = 0;
-let KWW = 0;  
-let KKK = 0;
-let KDD = 0;
+
+let mode = null;
+
+function hideAll(){
+    document.getElementById("KodeksK").style.display = "none";
+    document.getElementById("KodeksW").style.display = "none";
+    document.getElementById("suszenie").style.display = "none";
+}
+
+function KK(){
+    hideAll();
+    document.getElementById("KodeksK").style.display = "block";
+    mode = "KK";
+}
+
+function KW(){
+    hideAll();
+    document.getElementById("KodeksW").style.display = "block";
+    mode = "KW";
+}
+
+function Suszenie(){
+    hideAll();
+    document.getElementById("suszenie").style.display = "block";
+    mode = "SUSZENIE";
+}
+
 function reset(){
   let checkboxes = document.querySelectorAll('.check1');
   grzywnagg.value = 0;
@@ -24,14 +47,26 @@ function reset(){
 }
 
 function calculateTotal() {
-    error1dis.innerHTML = "";
-    error2dis.innerHTML = "";
-    let wyrok = 0;
-    let grzywna = 0;
-    let powod = "";
-    grzywnagg.value = 0;
-    czasgg.value = 0;
-    powodgg.value = "";
+function calculateTotal(){
+
+    if(mode === null){
+        alert("Wybierz kategorię (KK / KW / Suszenie)");
+        return;
+    }
+
+    if(mode === "SUSZENIE"){
+        calculateSuszenie();
+        return;
+    }
+
+    let suma = 0;
+    document.querySelectorAll("input[type=checkbox]:checked").forEach(el=>{
+        suma += Number(el.value);
+    });
+
+    document.getElementById("grzywna").value = suma + " zł";
+}
+
 
 
     
@@ -98,7 +133,29 @@ function calculateTotal() {
         artykol = 81;
         grzywna = 5000;
       }
-      
+      function calculateSuszenie(){
+    const predkosc = Number(document.getElementById("predkosc").value);
+
+    if(!predkosc || predkosc <= 0){
+        document.getElementById("error2").innerText = "Podaj prawidłową prędkość";
+        return;
+    }
+
+    document.getElementById("error2").innerText = "";
+
+    let mandat = 0;
+
+    if(predkosc <= 10) mandat = 50;
+    else if(predkosc <= 20) mandat = 100;
+    else if(predkosc <= 30) mandat = 200;
+    else if(predkosc <= 40) mandat = 300;
+    else if(predkosc <= 50) mandat = 400;
+    else mandat = 500;
+
+    document.getElementById("grzywna").value = mandat + " zł";
+    document.getElementById("powod").value = "Przekroczenie prędkości o " + predkosc + " km/h";
+}
+
 
 
       powodgg.value = "Dz.U. 2021 poz 2484 § III.B."+artykol+" ("+predkosc+"km/h)";
@@ -277,38 +334,3 @@ function Suszenie(){
 
 }
 
-function toggleTheme(){
-    document.body.classList.toggle("light");
-
-    const isLight = document.body.classList.contains("light");
-    localStorage.setItem("theme", isLight ? "light" : "dark");
-
-    document.getElementById("themeBtn").innerText =
-        isLight ? "☀️ Tryb dzienny" : "🌙 Tryb nocny";
-}
-
-(function(){
-    const saved = localStorage.getItem("theme");
-    if(saved === "light"){
-        document.body.classList.add("light");
-        document.getElementById("themeBtn").innerText = "☀️ Tryb dzienny";
-    }
-})();
-function filterContent(input, contentId){
-    const text = input.value.toLowerCase();
-    const pre = document.getElementById(contentId);
-
-    let original = pre.dataset.original;
-    if(!original){
-        original = pre.innerHTML;
-        pre.dataset.original = original;
-    }
-
-    if(text.trim() === ""){
-        pre.innerHTML = original;
-        return;
-    }
-
-    const regex = new RegExp(`(${text})`,'gi');
-    pre.innerHTML = original.replace(regex, `<mark>$1</mark>`);
-}
